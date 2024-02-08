@@ -1,22 +1,16 @@
 <script>
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-    import '$lib/styles.css';
+	import '$lib/styles.css';
 </script>
 
 <svelte:head>
-    <title>Nu Vooruit - Home</title>
+    <title>Nu Vooruit - Contact</title>
 	<meta name="description" content="About this app"/>
 </svelte:head>
 
 <section>
-    <Header />
-
-	<main>
-		
-	</main>
-
-	<Footer />
+	contact
 </section>
 
 <style>
