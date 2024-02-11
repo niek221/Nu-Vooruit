@@ -1,11 +1,7 @@
-async function comparePassword (userPassword) {
+export const comparePassword = () => {
     if (userPassword === "wachtwoord") {
         return true
     } else {
        return false
     }
-}
-
-module.exports = {
-    comparePassword
 }

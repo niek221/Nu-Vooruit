@@ -1,14 +1,15 @@
-const express = require('express')
-const jwt = require('jsonwebtoken')
+import express from 'express'
+
 const router = express.Router()
 
-const { comparePassword } = require('../functions/passwordFunctions.js')  
-const { tokenGenerator } = require('../functions/tokenFunctions.js')  
+import { comparePassword } from '../functions/passwordFunctions.mjs'
+import { tokenGenerator } from '../functions/tokenFunctions.mjs'
 
 // Path to JSON files
 const contentFilePath_1 = '../content/content.json'
 
-router.post('/login', async (req, res) => {
+router.get('/login', async (req, res) => {
+    res.send("hello")
     const isPasswordCorrect = await comparePassword(req.body.password);
     if (isPasswordCorrect) {
         const userIP = req.ip;
@@ -20,6 +21,4 @@ router.post('/login', async (req, res) => {
     }
 })
 
-module.exports = {
-    router
-}
+export default router;

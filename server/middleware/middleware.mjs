@@ -1,18 +1,18 @@
-const bodyParser = require('body-parser') 
-const cookieParser = require('cookie-parser')
-const jwt = require('jsonwebtoken')
+import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
+import jwt from 'jsonwebtoken'
 
 // Parses incoming data to process it
-function parser (req, res, next) {
+export const parser = (req, res, next) => {
     bodyParser.json()(req, res, next)
 }
 
-function cookiesParser (req, res, next) {
+export const cookiesParser = (req, res, next) => {
     cookieParser()(req, res, next);
 }
 
 // JWT authenticating token
-function checkJWT (req, res, next) {
+export const checkJWT = (req, res, next) => {
     const userToken = req.cookies.jwt
 
     if (req.path === '/login') {
@@ -36,10 +36,4 @@ function checkJWT (req, res, next) {
         }
         next()
     })
-}
-
-module.exports = {
-    parser,
-    cookiesParser,
-    checkJWT
 }
