@@ -8,6 +8,10 @@
             <span>Nu Vooruit</span>
         </a>
 
+        <div class="hamburger-menu">
+
+        </div>
+
         <div class="menu-mobile">
             <a href="/">Home</a>
             <a href="/missie">Missie & Visie</a>
@@ -76,7 +80,7 @@
         /* Menu */
         .menu-desktop {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.8rem;
         }
 
         .menu-desktop > a {
