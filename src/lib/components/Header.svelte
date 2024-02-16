@@ -1,4 +1,9 @@
 <script lang="ts">
+    let isActive = false;
+
+    function toggleClass() {
+        isActive = !isActive;
+    }
 </script>
 
 <header>
@@ -8,11 +13,11 @@
             <span>Nu Vooruit</span>
         </a>
 
-        <div class="hamburger-menu">
-            
-        </div>
-
-        <div class="menu-mobile">
+        <button class="hamburger-menu" class:active={isActive} on:click={toggleClass}>
+            Toggle Class
+        </button>
+    
+        <div class="menu-mobile" class:active={isActive}>
             <a href="/">Home</a>
             <a href="/missie">Missie & Visie</a>
             <a href="/zorgteam">Zorgteam</a>
@@ -21,6 +26,8 @@
             <a href="/contact">Contact</a>
         </div>
     </div>    
+
+    
 
     <!-- Desktop -->
     <div class="header-desktop">
@@ -40,6 +47,10 @@
 </header>
 
 <style>
+    .active {
+        background-color: pink;
+    }
+
     /* Mobile */
     .logo-mobile {
         display: none;
@@ -95,4 +106,13 @@
             transition: 0.3s;
         }       
     }
+
+    @media (min-width: 1200px) {
+        .header-desktop {
+            padding-inline: 17%;
+        }
+    }
+
+    /* Hamburger code */
+    
 </style>
