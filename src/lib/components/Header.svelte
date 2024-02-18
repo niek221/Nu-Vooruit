@@ -1,33 +1,44 @@
 <script lang="ts">
-    let isActive = false;
+    import { page } from '$app/stores'
+    import { fade } from 'svelte/transition'
+    import nuVooruitLogo from '$lib/images/nuvooruit.jpg'
+
+    let isActive = false
 
     function toggleClass() {
-        isActive = !isActive;
+        isActive = !isActive
+
+        document.body.style.overflow = isActive ? 'hidden' : ''
+    }
+
+    function closeMenu() {
+        isActive = false
     }
 </script>
 
 <header>
     <!-- Mobile -->
     <div class="header-mobile">
-        <a href="/" class="logo-mobile">
-            <span>Nu Vooruit</span>
-        </a>
-
-        <button class="hamburger-menu" class:active={isActive} on:click={toggleClass}>
-            Toggle Class
-        </button>
-    
-        <div class="menu-mobile" class:active={isActive}>
-            <a href="/">Home</a>
-            <a href="/missie">Missie & Visie</a>
-            <a href="/zorgteam">Zorgteam</a>
-            <a href="/begeleiding">Begeleiding</a>
-            <a href="/dagbesteding">Dagbesteding</a>
-            <a href="/contact">Contact</a>
+        <div class="nav-mobile">
+            <a href="/" class="logo-mobile">
+                <img src={nuVooruitLogo} alt="Nu-Vooruit-Logo">
+            </a>
+            <button class="hamburger-menu" class:active={isActive} on:click={toggleClass}>
+                Menu
+            </button>
         </div>
-    </div>    
-
     
+        {#if isActive}
+            <div class="menu-mobile" transition:fade={{ duration: 300 }} class:menu-mobile-active={isActive}>
+                <a href="/" class:active-link={$page.url.pathname === '/'} on:click={closeMenu}>Home</a>
+                <a href="/missie" class:active-link={$page.url.pathname === '/missie'} on:click={closeMenu}>Missie & Visie</a>
+                <a href="/zorgteam" class:active-link={$page.url.pathname === '/zorgteam'} on:click={closeMenu}>Zorgteam</a>
+                <a href="/begeleiding" class:active-link={$page.url.pathname === '/begeleiding'} on:click={closeMenu}>Begeleiding</a>
+                <a href="/dagbesteding" class:active-link={$page.url.pathname === '/dagbesteding'} on:click={closeMenu}>Dagbesteding</a>
+                <a href="/contact" class:active-link={$page.url.pathname === '/contact'} on:click={closeMenu}>Contact</a>
+            </div>
+        {/if}
+    </div>    
 
     <!-- Desktop -->
     <div class="header-desktop">
@@ -36,24 +47,85 @@
         </a>
 
         <div class="menu-desktop">
-            <a href="/">Home</a>
-            <a href="/missie">Missie & Visie</a>
-            <a href="/zorgteam">Zorgteam</a>
-            <a href="/begeleiding">Begeleiding</a>
-            <a href="/dagbesteding">Dagbesteding</a>
-            <a href="/contact">Contact</a>
+            <a href="/" class:active-link={$page.url.pathname === '/'}>Home</a>
+            <a href="/missie" class:active-link={$page.url.pathname === '/missie'}>Missie & Visie</a>
+            <a href="/zorgteam" class:active-link={$page.url.pathname === '/zorgteam'}>Zorgteam</a>
+            <a href="/begeleiding" class:active-link={$page.url.pathname === '/begeleiding'}>Begeleiding</a>
+            <a href="/dagbesteding" class:active-link={$page.url.pathname === '/dagbesteding'}>Dagbesteding</a>
+            <a href="/contact" class:active-link={$page.url.pathname === '/contact'}>Contact</a>
         </div>
     </div>    
 </header>
 
 <style>
-    .active {
-        background-color: pink;
+    /* Mobile */
+    .header-desktop {
+        display: none;
     }
 
-    /* Mobile */
+    .nav-mobile {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        padding-top: 1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 2rem;
+    }
+
     .logo-mobile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .menu-mobile {
         display: none;
+    }
+
+    .menu-mobile > a {
+        display: flex;
+
+        margin-bottom: 1rem;
+        padding: 1rem;
+
+        color: #3A5DAE;
+        font-size: 20px;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .active-link {
+        color: rgb(221, 221, 0) !important;
+    }
+
+    .menu-mobile-active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+
+        padding-top: 10vh;
+
+        z-index: 1;
+        min-height: 100vh;
+    }
+
+    @media (min-width: 800px) {
+        .nav-mobile {
+            padding-top: 1.5rem;
+            padding-left: 4.5rem;
+            padding-right: 6rem;
+        }
+    }
+
+    @media (min-width: 900px) {
+        .nav-mobile {
+            padding-top: 2.5rem;
+            padding-left: 6.5rem;
+            padding-right: 8rem;
+        }
     }
 
     /* Desktop */
